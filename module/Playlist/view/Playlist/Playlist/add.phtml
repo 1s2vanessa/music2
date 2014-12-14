@@ -1,0 +1,33 @@
+<?php
+namespace Playlist;
+
+$title = 'Les albums';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ 
+ <table class="table">
+ <tr>
+     <th>Title</th>
+     <th>Artist</th>
+     <th>&nbsp;</th>
+ </tr>
+ 
+ <a href="<?php echo $this->url('playlist',
+             array('action'=>'retour'));?>">Retour Playlist</a>
+ <br>     
+ <?php 
+ 
+ foreach ($albums as $album) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($album->title);?></td>
+     <td><?php echo $this->escapeHtml($album->artist);?></td>
+     <td>
+         <a href="<?php echo $this->url('playlist',
+             array('action'=>'add', 'id' => $album->id));?>">Add Music</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
+ 
+ 

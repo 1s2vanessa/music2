@@ -1,18 +1,22 @@
 <?php
 
-namespace Album\Model;
+namespace Playlist\Model;
 
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Album implements InputFilterAwareInterface {
+class Playlist implements InputFilterAwareInterface {
 
     public $id;
     public $artist;
     public $title;
-    protected $inputFilter;                       
-
+    public $id_ablum;
+    public $id_user;
+    protected $inputFilter;                       // <-- Add this variable
+   
+    
+    
     public function exchangeArray($data)
      {
          $this->id     = (isset($data['id']))     ? $data['id']     : null;
@@ -80,6 +84,24 @@ class Album implements InputFilterAwareInterface {
                     ),
                 ),
             ));
+            
+             $inputFilter->add(array(
+                'name' => 'id_album',
+                'required' => true,
+                'filters' => array(
+                    array('name' => 'Int'),
+                ),
+            ));
+
+             
+//              $inputFilter->add(array(
+//                'name' => 'id_user',
+//                'required' => true,
+//                'filters' => array(
+//                    array('name' => 'Int'),
+//                ),
+//            ));
+
 
             $this->inputFilter = $inputFilter;
         }
