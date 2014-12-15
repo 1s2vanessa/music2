@@ -1,6 +1,6 @@
 <?php
 
-$title = 'Delete this music';
+$title = 'Delete music';
  $this->headTitle($title);
  ?>
  <h1><?php echo $this->escapeHtml($title); ?></h1>
@@ -14,6 +14,7 @@ $title = 'Delete this music';
      'action' => 'delete',
      'id'     => $this->id,
  ));
+ 
  ?>
  <form action="<?php echo $url; ?>" method="post">
  <div>

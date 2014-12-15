@@ -17,7 +17,8 @@ namespace Album\Model;
          $resultSet = $this->tableGateway->select();
          return $resultSet;
      }
-
+     
+    
      public function getAlbum($id)
      {
          $id  = (int) $id;

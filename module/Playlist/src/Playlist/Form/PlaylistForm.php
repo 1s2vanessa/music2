@@ -29,7 +29,20 @@ namespace Playlist\Form;
                  'label' => 'Artist',
              ),
          ));
+        
+         
          $this->add(array(
+             'name' => 'id_user',
+             'type' => 'Hidden',
+         ));
+         
+         
+         $this->add(array(
+             'name' => 'id_album',
+             'type' => 'Hidden',
+         ));
+         
+          $this->add(array(
              'name' => 'submit',
              'type' => 'Submit',
              'attributes' => array(
@@ -37,6 +50,7 @@ namespace Playlist\Form;
                  'id' => 'submitbutton',
              ),
          ));
+         
      }
  }
  

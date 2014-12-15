@@ -4,25 +4,23 @@ namespace Playlist\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Album\Model\Album ;
+use Playlist\Model\Playlist;
 
 class PlaylistController extends AbstractActionController {
 
     protected $playlistTable;
     protected $albumTable;
-     protected $tableGateway;
-     protected $tableGatewayAlbum;
-     protected $idUser; //récupérer avec l'authentification
+    protected $tableGateway;
+    protected $tableGatewayAlbum;
+    protected $idUser; //récupérer avec l'authentification
+    protected $idAlbum;
 
     public function indexAction() {
-        $this->idUser=2;
-       // echo $this->idUser;
+        $this->idUser = 2;
+        // echo $this->idUser;
         return new ViewModel(array(
-      'playlists' => $this->getPlaylistTable()->fetchByIdUser($this->idUser),
-     //    'playlists' => $this->getPlaylistTable()->fetchAll(),
-     
+            'playlists' => $this->getPlaylistTable()->fetchByIdUser($this->idUser),
         ));
-       
     }
 
     public function getAlbumTable() {
@@ -35,26 +33,29 @@ class PlaylistController extends AbstractActionController {
 
     public function addAction() {
         //ici on récupère ID music et ID User --> insertion dans playlist
-//        return new ViewModel(array(
         $albums = $this->getAlbumTable()->fetchAll();
-        $this->idUser=2;
-         $id = (int) $this->params()->fromRoute('id', 0);
-         if ($id){ //pour savoir si c'est la première fois que nous sommes sur la page
-             
-         try {
-            //$playlist= new Playlist();
-             
-            $album=$this->getAlbumTable()->getAlbum($id);
-            var_dump($album);
-           
-            $this->getPlaylistTable()->savePlaylist($this->idUser, $album);
-              
-        } catch (\Exception $ex) {
-            echo "erreur";
+        $this->idUser = 2;
+        $this->idAlbum = (int) $this->params()->fromRoute('id', 0); //permet de récupérer l'id de l'album sur lequel on a cliqué
+        if ($this->idAlbum) { //pour savoir si c'est la première fois que nous sommes sur la page
+            try {
+                $album = $this->getAlbumTable()->getAlbum($this->idAlbum);
+                $playlist = new Playlist();
+                $id_play = $this->getPlaylistTable()->count() + 1;
+                $data = array(
+                    'id'=>$id_play,
+                    'artist' => $album->artist,
+                    'title' => $album->title,
+                    'id_album' => $album->id,
+                    'id_user' => $this->idUser
+                );
+                $playlist->exchangeArray($data);
+                var_dump($playlist);
+                $this->getPlaylistTable()->savePlaylist($playlist);
+            } catch (\Exception $ex) {
+                //echo "erreur";
+            }
         }
-            
-         }
-        return array(/*'form' => $form,*/'albums'=>$albums);
+        return array('albums' => $albums);
     }
 
     public function deleteAction() {
@@ -90,18 +91,22 @@ class PlaylistController extends AbstractActionController {
         return $this->playlistTable;
     }
 
-      public function getAlbum($idA)
-     {
-         $idA  = (int) $idA;
-         $rowset = $this->tableGatewayAlbum->select(array('id' => $idA));
-         $row = $rowset->current();
-         if (!$row) {
-             throw new \Exception("Could not find row $idA");
-         }
-         return $row;
-     }
-     
-     public function retourAction(){
-          return $this->redirect()->toRoute('playlist');
-     }
+    public function getAlbum($idA) {
+        $idA = (int) $idA;
+        $rowset = $this->tableGatewayAlbum->select(array('id' => $idA));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $idA");
+        }
+
+
+
+        return $row;
+    }
+
+    
+    public function retourAction() {
+        return $this->redirect()->toRoute('playlist');
+    }
+
 }
