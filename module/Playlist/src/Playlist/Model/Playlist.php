@@ -2,11 +2,7 @@
 
 namespace Playlist\Model;
 
-//use Zend\InputFilter\InputFilter;
-//use Zend\InputFilter\InputFilterAwareInterface;
-//use Zend\InputFilter\InputFilterInterface;
-
-class Playlist /*implements InputFilterAwareInterface*/ {
+class Playlist {
 
     public $id;
     public $artist;
@@ -14,19 +10,18 @@ class Playlist /*implements InputFilterAwareInterface*/ {
     public $id_ablum;
     public $id_user;
 
-    public function exchangeArray($data)
-     {
-         $this->id = $data['id'];
+    public function exchangeArray($data) {
+        //id en auto-incrément
+        $this->id = $data['id'];
         // $this->id     = $this->getPlaylistTable()->count() + 1;
-         $this->artist = $data['artist'];
-         $this->title  = $data['title'];
-         $this->id_user  = $data['id_user'];
-            $this->id_ablum = $data['id_album'];
-        // var_dump($data);
-     }
+        $this->artist = $data['artist'];
+        $this->title = $data['title'];
+        $this->id_user = $data['id_user'];
+        $this->id_album = $data['id_album'];
+    }
 
-     public function getArrayCopy()
-     {
-         return get_object_vars($this);
-     }
+    public function getArrayCopy() {
+        return get_object_vars($this);
+    }
+
 }

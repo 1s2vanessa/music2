@@ -4,18 +4,18 @@ body {
 }
 
 .zf-green {
-    color: #68b604;
+    color: #0033CC;
 }
 
 .btn-success {
-  background-color: #57a900;
-  background-image: -moz-linear-gradient(top, #70d900, #57a900);
-  background-image: -ms-linear-gradient(top, #70d900, #57a900);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70d900), to(#57a900));
-  background-image: -webkit-linear-gradient(top, #70d900, #57a900);
-  background-image: -o-linear-gradient(top, #70d900, #57a900);
-  background-image: linear-gradient(top, #70d900, #57a900);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#70d900', endColorstr='#57a900', GradientType=0);
+  background-color: #00CCFF;
+  background-image: -moz-linear-gradient(top, #0066CC, #00CCFF);
+  background-image: -ms-linear-gradient(top, #0066CC, #00CCFF);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0066CC), to(#00CCFF));
+  background-image: -webkit-linear-gradient(top, #0066CC, #00CCFF);
+  background-image: -o-linear-gradient(top, #0066CC, #00CCFF);
+  background-image: linear-gradient(top, #0066CC, #0066CC);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0066CC', endColorstr='#0066CC', GradientType=0);
 }
 
 .btn-success:hover,
@@ -23,15 +23,19 @@ body {
 .btn-success.active,
 .btn-success.disabled,
 .btn-success[disabled] {
-  background-color: #57a900;
+  background-color: #00CCFF;
 }
 
 .btn-success:active, .btn-success.active {
-  background-color: #57a900;
+  background-color: #00CCFF;
 }
 
 div.container a.brand {
     background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
     margin-left: 0;
     padding: 8px 20px 12px 40px;
+}
+
+div.label{
+     color: #0033CC;
 }

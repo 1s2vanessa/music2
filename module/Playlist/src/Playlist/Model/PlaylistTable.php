@@ -3,6 +3,7 @@
 namespace Playlist\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
 
 class PlaylistTable {
 
@@ -20,8 +21,8 @@ class PlaylistTable {
 
     public function fetchByIdUser($idUser) {
         $resultSet = $this->tableGateway->select(array('id_user' => $idUser));
-            //
-            //var_dump($resultSet->buffer());
+        //
+        //var_dump($resultSet->buffer());
         return $resultSet;
         //$resultSet=$select->from( $this->tableGateway->getTable())
         //                ->where(array('id_user = ?' => (int) $idUser)
@@ -34,6 +35,20 @@ class PlaylistTable {
         //   var_dump($resultSet->buffer());
     }
 
+    public function fetchLastPlaylist($limit)
+    {
+        //echo "limit:".$limit;
+    	$select = new Select();
+    	$select->from('playlist')
+    	       ->order('id DESC')
+    	       ->limit($limit);
+       // var_dump($select->getSqlString());
+    	$rowset = $this->tableGateway->selectWith($select);
+        $row=$rowset->current();
+        //var_dump($row->id);
+    	return $row->id;
+    }
+    
     public function count() {
         $resultSet = $this->tableGateway->select('id');
         return count($resultSet);
@@ -79,7 +94,7 @@ class PlaylistTable {
             'id' => (int) $playlist->id,
             'artist' => $playlist->artist,
             'title' => $playlist->title,
-            'id_album' => $playlist->id_ablum,
+            'id_album' => $playlist->id_album,
             'id_user' => $playlist->id_user
         );
         // var_dump($data['id_album']);
@@ -87,16 +102,23 @@ class PlaylistTable {
         //$id_play = (int) $playlist->id;
         //var_dump($data);
 
-
-        /* if ($this->getAlbum($playlist->id_ablum)) {
+           // var_dump($playlist->id);
+        /* if ($this->getAlbum($playlist->id_album)) {
           echo "Déjà dans votre playlist";
           } else { */
-        // if ($id_play == 0) {
+        // var_dump( $this->tableGateway);
+        ////$album = $this->tableGateway->select(array('id_album' => $playlist->id_album));
+       // var_dump($album);
+        // if ( )==null) {
         echo "AJOUTÉ";
 
+
         $this->tableGateway->insert($data);
+        //}else{
+        //    echo "Dejà dans votre playlist";
+        // }
         //   var_dump($this->tableGateway);
-        //}
+        // }
         // }
         // var_dump($this->getPlaylist($id));
         // if ($this->getPlaylist($id)) {
@@ -109,6 +131,14 @@ class PlaylistTable {
 
     public function deletePlaylist($id) {
         $this->tableGateway->delete(array('id' => (int) $id));
+    }
+
+    public function getAlbumTable() {
+        if (!$this->albumTable) {
+            $sm = $this->getServiceLocator();
+            $this->albumTable = $sm->get('Album\Model\AlbumTable');
+        }
+        return $this->albumTable;
     }
 
 }

@@ -5,19 +5,22 @@ namespace Playlist\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Playlist\Model\Playlist;
+use Zend\Session\Container;
+use   Zend\Db\Sql\Select;
 
 class PlaylistController extends AbstractActionController {
 
     protected $playlistTable;
     protected $albumTable;
-    protected $tableGateway;
     protected $tableGatewayAlbum;
     protected $idUser; //récupérer avec l'authentification
     protected $idAlbum;
 
     public function indexAction() {
-        $this->idUser = 2;
-        // echo $this->idUser;
+        //récupération de l'id de l'user 
+        $userIdContainer = new Container('utilisateur');
+        $this->idUser = $userIdContainer->offSetGet(idUtilisateur);
+        //echo "user". $this->idUser;
         return new ViewModel(array(
             'playlists' => $this->getPlaylistTable()->fetchByIdUser($this->idUser),
         ));
@@ -31,16 +34,17 @@ class PlaylistController extends AbstractActionController {
         return $this->albumTable;
     }
 
-    public function addAction() {
-        //ici on récupère ID music et ID User --> insertion dans playlist
+    public function addAction() {//ici on récupère ID music et ID User --> insertion dans playlist
+        $userIdContainer = new Container('utilisateur');
+        $this->idUser = $userIdContainer->offSetGet(idUtilisateur);
         $albums = $this->getAlbumTable()->fetchAll();
-        $this->idUser = 2;
+        
         $this->idAlbum = (int) $this->params()->fromRoute('id', 0); //permet de récupérer l'id de l'album sur lequel on a cliqué
         if ($this->idAlbum) { //pour savoir si c'est la première fois que nous sommes sur la page
             try {
-                $album = $this->getAlbumTable()->getAlbum($this->idAlbum);
+               $album = $this->getAlbumTable()->getAlbum($this->idAlbum);
                 $playlist = new Playlist();
-                $id_play = $this->getPlaylistTable()->count() + 1;
+                $id_play = $this->getPlaylistTable()->fetchLastPlaylist(1) + 1;
                 $data = array(
                     'id'=>$id_play,
                     'artist' => $album->artist,
@@ -49,7 +53,7 @@ class PlaylistController extends AbstractActionController {
                     'id_user' => $this->idUser
                 );
                 $playlist->exchangeArray($data);
-                var_dump($playlist);
+              //  var_dump($playlist);
                 $this->getPlaylistTable()->savePlaylist($playlist);
             } catch (\Exception $ex) {
                 //echo "erreur";
@@ -98,15 +102,12 @@ class PlaylistController extends AbstractActionController {
         if (!$row) {
             throw new \Exception("Could not find row $idA");
         }
-
-
-
         return $row;
     }
 
-    
     public function retourAction() {
         return $this->redirect()->toRoute('playlist');
     }
 
+    
 }
