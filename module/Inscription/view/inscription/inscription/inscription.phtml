@@ -1,0 +1,36 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', 'inscription');
+$form->get('username')->setAttribute('class', 'textbox');
+$form->get('password')->setAttribute('class', 'textbox');
+$form->get('repassword')->setAttribute('class', 'textbox');
+$form->get('submit')->setAttribute('class', 'button');
+?>
+           
+<?php echo $this->form()->openTag($form); ?>
+<div class="label">
+	Enter username<span class="red">*</span>
+</div>
+<div class="textbox-div">
+	<?php echo $this->formText($form->get('username')); ?>
+</div>
+<div class="label">
+	Enter password<span class="red">*</span>
+</div>
+<div class="textbox-div">
+	<?php echo $this->formPassword($form->get('password')); ?>
+</div>
+<div class="label">
+	Confirm password<span class="red">*</span>
+</div>
+<div class="textbox-div">
+	<?php echo $this->formPassword($form->get('repassword')); ?>
+</div>
+<div class="textbox-div">
+    <?php echo $this->formSubmit($form->get('submit')); ?>
+</div>
+<?php echo $this->form()->closeTag(); ?>
+<br />
+<?php if (isset($loginMsg[0])): ?>
+	<span class="red"><?php echo $loginMsg[0]; ?></span><br />
+<?php endif ?>

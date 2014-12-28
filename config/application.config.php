@@ -5,7 +5,8 @@ return array(
         'Application',
         'Album',
         'Playlist',
-       'Auth'
+        'Auth',
+        'Inscription'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
