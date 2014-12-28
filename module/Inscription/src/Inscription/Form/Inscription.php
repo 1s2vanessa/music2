@@ -92,9 +92,9 @@ class Inscription extends Form
     }
     
     
-    /*public function isValid($data)
+  /*  public function isValid($data)
 {
-	$password 	= $this->getElement('password');
+	$password = $this->getElement('password');
 	$password->addValidator(new App_Validate_PasswordMatch($data['repassword']));
 
 	return parent::isValid($data);

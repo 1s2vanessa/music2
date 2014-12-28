@@ -9,13 +9,13 @@ $form->get('submit')->setAttribute('class', 'button');
            
 <?php echo $this->form()->openTag($form); ?>
 <div class="label">
-	Enter username<span class="red">*</span>
+	Enter username (min 3 char.)<span class="red">*</span>
 </div>
 <div class="textbox-div">
 	<?php echo $this->formText($form->get('username')); ?>
 </div>
 <div class="label">
-	Enter password<span class="red">*</span>
+	Enter password (min 5 char.)<span class="red">*</span>
 </div>
 <div class="textbox-div">
 	<?php echo $this->formPassword($form->get('password')); ?>

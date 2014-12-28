@@ -30,29 +30,6 @@ return array(
 					)
 				)
             ),
-             'logout' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/logout',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Inscription\Controller',
-                        'controller'    => 'Inscription',
-                        'action'        => 'logout',
-                    ),
-                ),
-                'may_terminate' => true,
-				'child_routes' => array(
-					'default' => array(
-						'type'    => 'Segment',
-						'options' => array(
-							'route'    => '[/:action]',
-							'constraints' => array(
-								'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-							)
-						)
-					)
-				)
-            ),
         ),
     ),
     'service_manager' => array(
