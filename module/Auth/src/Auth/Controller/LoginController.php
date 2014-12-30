@@ -55,7 +55,11 @@ class LoginController extends AbstractActionController {
 
                 $authService->getStorage()
                         ->write($userId);
+                if ($userId!=1){
                 return $this->redirect()->toUrl('playlist');
+                }else{
+                   return $this->redirect()->toUrl('album'); 
+                }
             } else {
                 $loginMsg = $result->getMessages();
             }
