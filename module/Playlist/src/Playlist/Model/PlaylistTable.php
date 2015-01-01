@@ -110,7 +110,7 @@ class PlaylistTable {
         ////$album = $this->tableGateway->select(array('id_album' => $playlist->id_album));
        // var_dump($album);
         // if ( )==null) {
-        echo "AJOUTÉ";
+        echo "Added";
 
 
         $this->tableGateway->insert($data);
