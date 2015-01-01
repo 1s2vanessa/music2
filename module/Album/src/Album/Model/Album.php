@@ -20,13 +20,11 @@ class Album implements InputFilterAwareInterface {
          $this->title  = (isset($data['title']))  ? $data['title']  : null;
      }
 
-     // Add the following method:
      public function getArrayCopy()
      {
          return get_object_vars($this);
      }
      
-    // Add content to these methods:
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new \Exception("Not used");
     }

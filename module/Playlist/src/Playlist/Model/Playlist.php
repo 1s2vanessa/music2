@@ -13,7 +13,6 @@ class Playlist {
     public function exchangeArray($data) {
         //id en auto-incrément
         $this->id = $data['id'];
-        // $this->id     = $this->getPlaylistTable()->count() + 1;
         $this->artist = $data['artist'];
         $this->title = $data['title'];
         $this->id_user = $data['id_user'];
