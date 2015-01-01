@@ -21,24 +21,13 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Follow Us') ?></h3>
+                <h3 class="panel-title"><?php echo $this->translate('More about us') ?></h3>
             </div>
             <div class="panel-body">
-                <p><?php echo sprintf($this->translate('You can follow us on FB and Twitter : .... .Don\'t hesitate to share your ideas contacting us ')) ?></p>
-                <p><a class="btn btn-success pull-right" href="http://modules.zendframework.com/" target="_blank"><?php echo $this->translate('Explore ZF2 Modules') ?> &raquo;</a></p>
+                <p><?php echo sprintf($this->translate('If you want to know more about us, check our work to %shttps://github.com/1s2vanessa/music2.git%s'),'<a href="https://github.com/1s2vanessa/music2" >','</a>') ?></p>
+                <p><a class="btn btn-success pull-right" href="https://github.com/1s2vanessa/music2" target="_blank"><?php echo $this->translate('Go to') ?> &raquo;</a></p>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Help &amp; Support') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('If you need any help or support while using our application, you may reach us via ....: %s#MPlay%s. We\'d love to hear any questions or feedback you may have regarding the beta releases.'),  '<span class="zf-green">', '</span>') ?></p>
-                <p><a class="btn btn-success pull-right" href="" target="_blank"><?php echo $this->translate('Contact Us') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
 </div>
