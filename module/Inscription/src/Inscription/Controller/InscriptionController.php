@@ -13,26 +13,55 @@ namespace Inscription\Controller;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     Inscription\Model\User,
-    Inscription\Model\UserTable,
     Inscription\Form\Inscription;
 
 class InscriptionController extends AbstractActionController {
     protected $userTable;
+    
+    
     function inscriptionAction() {
-        $form = new Inscription;
-        if ($this->getRequest()->isPost()) {
-            $form->setData($this->getRequest()->getPost());
-            if (!$form->isValid()) {
+         $form = new Inscription();
+      
+
+        $request = $this->getRequest();
+       
+        if ($request->isPost()) {
+            $user = new User();
+            $form->setInputFilter($user->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid() && ($form->getAttribute('password')==$form->getAttribute('repassword'))){
+               $user->exchangeArray($form->getData());
+            
+                $this->getUserTable()->saveUser($user);
+
+                // Redirect to home page
+                return $this->redirect()->toRoute('home');
+                
+                
+            }else{
+                 echo "Erreur dans la longueur de l'identifiant ou password ou les mots de passe ne sont pas identiques";
                 return new ViewModel(array('title' => 'Register',
                     'form' => $form
                 ));
-            } else {
-                $user = new User();
-                $user->exchangeArray($form->getData());
-                $this->getUserTable()->saveUser($user);
-                   // Redirect to home page
-                return $this->redirect()->toRoute('home');
             }
+       // }
+        //return array('form' => $form);
+        
+//        $form = new Inscription();
+//        if ($this->getRequest()->isPost()) {
+//            $form->setData($this->getRequest()->getPost());
+//            if (!$form->isValid()) {
+//                return new ViewModel(array('title' => 'Register',
+//                    'form' => $form
+//                ));
+//            } else {
+//                $user = new User();
+//                $user->exchangeArray($form->getData());
+//                $this->getUserTable()->saveUser($user);
+//                   // Redirect to home page
+//                return $this->redirect()->toRoute('home');
+//            }
         }
 
 

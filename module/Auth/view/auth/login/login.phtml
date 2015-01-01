@@ -10,21 +10,28 @@ $form->get('submit')->setAttribute('class', 'button');
            
 <?php echo $this->form()->openTag($form); ?>
 <div class="label">
-	USERNAME<span class="red">*</span>
+	USERNAME <span class="red">*</span> : 
 </div>
 <div class="textbox-div">
 	<?php echo $this->formText($form->get('username')); ?>
 </div>
+<br>
+
 <div class="label">
 	PASSWORD<span class="red">*</span>
 </div>
 <div class="textbox-div">
 	<?php echo $this->formPassword($form->get('password')); ?>
 </div>
+
+<br>
 <div class="textbox-div">
 	<?php echo $this->formElement($form->get('csrf')) ?>
     <?php echo $this->formSubmit($form->get('submit')); ?>
 </div>
+
+<br><br>
+<a href="<?php echo $this->url('inscription') ?>"><?php echo $this->translate('not registered ?') ?></a>
 <?php echo $this->form()->closeTag(); ?>
 <br />
 <?php if (isset($loginMsg[0])): ?>
