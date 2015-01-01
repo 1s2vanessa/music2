@@ -1,0 +1,36 @@
+<?php 
+$form->setAttribute('action', $this->url('inscription', array('action' => 'inscription')));
+ $form->prepare();
+ 
+echo $this->form()->openTag($form); 
+?>
+
+<div class="label">
+	Enter username (min 5 char.)<span class="red">*</span>
+</div>
+<div class="textbox-div">
+	<?php echo $this->formText($form->get('username')); ?>
+</div>
+<br>
+<div class="label">
+	Enter password (min 5 char.)<span class="red">*</span>
+</div>
+<div class="textbox-div">
+	<?php echo $this->formPassword($form->get('password')); ?>
+</div>
+<br>
+<div class="label">
+	Confirm password<span class="red">*</span>
+</div>
+<div class="textbox-div">
+	<?php echo $this->formPassword($form->get('repassword')); ?>
+</div>
+<br>
+<div class="textbox-div">
+    <?php echo $this->formSubmit($form->get('submit')); ?>
+</div>
+<?php echo $this->form()->closeTag(); ?>
+<br />
+<?php if (isset($loginMsg[0])): ?>
+	<span class="red"><?php echo $loginMsg[0]; ?></span><br />
+<?php endif ?>
