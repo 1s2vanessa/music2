@@ -40,7 +40,7 @@ class InscriptionController extends AbstractActionController {
                 
                 
             }else{
-                 echo "Erreur dans la longueur de l'identifiant ou password ou les mots de passe ne sont pas identiques";
+                 echo "Please check that your passwords match and try again.";
                 return new ViewModel(array('title' => 'Register',
                     'form' => $form
                 ));
