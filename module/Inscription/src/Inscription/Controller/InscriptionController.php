@@ -29,7 +29,7 @@ class InscriptionController extends AbstractActionController {
             $user = new User();
             $form->setInputFilter($user->getInputFilter());
             $form->setData($request->getPost());
-var_dump($request->getContent());
+
             if ($form->isValid() && ($form->getAttribute('password')==$form->getAttribute('repassword'))){
                $user->exchangeArray($form->getData());
             
@@ -40,7 +40,7 @@ var_dump($request->getContent());
                 
                 
             }else{
-                 echo "Mot de passe non identiques !";
+                 echo "Erreur dans la longueur de l'identifiant ou password ou les mots de passe ne sont pas identiques";
                 return new ViewModel(array('title' => 'Register',
                     'form' => $form
                 ));
