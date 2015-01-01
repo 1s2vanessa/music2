@@ -45,23 +45,6 @@ class InscriptionController extends AbstractActionController {
                     'form' => $form
                 ));
             }
-       // }
-        //return array('form' => $form);
-        
-//        $form = new Inscription();
-//        if ($this->getRequest()->isPost()) {
-//            $form->setData($this->getRequest()->getPost());
-//            if (!$form->isValid()) {
-//                return new ViewModel(array('title' => 'Register',
-//                    'form' => $form
-//                ));
-//            } else {
-//                $user = new User();
-//                $user->exchangeArray($form->getData());
-//                $this->getUserTable()->saveUser($user);
-//                   // Redirect to home page
-//                return $this->redirect()->toRoute('home');
-//            }
         }
 
 

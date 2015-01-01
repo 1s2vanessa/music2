@@ -8,7 +8,6 @@ namespace Playlist\Form;
  {
      public function __construct($name = null)
      {
-         // we want to ignore the name passed
          parent::__construct('playlist');
 
          $this->add(array(
@@ -30,7 +29,6 @@ namespace Playlist\Form;
              ),
          ));
         
-         
          $this->add(array(
              'name' => 'id_user',
              'type' => 'Hidden',

@@ -2,10 +2,9 @@
 
 namespace Inscription\Model;
 
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface,
-    Zend\Validator\Identical;
+use Zend\InputFilter\InputFilter,
+    Zend\InputFilter\InputFilterAwareInterface,
+    Zend\InputFilter\InputFilterInterface;
 
 class User implements InputFilterAwareInterface {
 
@@ -20,12 +19,10 @@ class User implements InputFilterAwareInterface {
         $this->password = (isset($data['password'])) ? $data['password'] : null;
     }
 
-    // Add the following method:
     public function getArrayCopy() {
         return get_object_vars($this);
     }
 
-    // Add content to these methods:
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new \Exception("Not used");
     }
@@ -76,14 +73,6 @@ class User implements InputFilterAwareInterface {
                 ), 'validators' => array(
                     array('name' => 'StringLength', 'options' => array('min' => 5))
                 ),
-                //C'est ici que sa bloque, si tu decommente et que tu esaaye de t'inscrire
-                // sa met une erreur comme quoi Indentical n'existe pas
-//                array(
-//                    'Identical', false, array('token' =>
-//                        'password', 'messages' =>
-//                        array(Identical::NOT_SAME =>
-//                            'Passwords does not match'))
-//                )
                     )
             );
 

@@ -2,11 +2,10 @@
 
 namespace Playlist\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Playlist\Model\Playlist;
-use Zend\Session\Container;
-use   Zend\Db\Sql\Select;
+use Zend\Mvc\Controller\AbstractActionController,
+    Zend\View\Model\ViewModel,
+    Playlist\Model\Playlist,
+    Zend\Session\Container;
 
 class PlaylistController extends AbstractActionController {
 
@@ -20,7 +19,7 @@ class PlaylistController extends AbstractActionController {
         //récupération de l'id de l'user 
         $userIdContainer = new Container('utilisateur');
         $this->idUser = $userIdContainer->offSetGet(idUtilisateur);
-        //echo "user". $this->idUser;
+
         return new ViewModel(array(
             'playlists' => $this->getPlaylistTable()->fetchByIdUser($this->idUser),
         ));
@@ -38,25 +37,23 @@ class PlaylistController extends AbstractActionController {
         $userIdContainer = new Container('utilisateur');
         $this->idUser = $userIdContainer->offSetGet(idUtilisateur);
         $albums = $this->getAlbumTable()->fetchAll();
-        
+
         $this->idAlbum = (int) $this->params()->fromRoute('id', 0); //permet de récupérer l'id de l'album sur lequel on a cliqué
         if ($this->idAlbum) { //pour savoir si c'est la première fois que nous sommes sur la page
             try {
-               $album = $this->getAlbumTable()->getAlbum($this->idAlbum);
+                $album = $this->getAlbumTable()->getAlbum($this->idAlbum);
                 $playlist = new Playlist();
                 $id_play = $this->getPlaylistTable()->fetchLastPlaylist(1) + 1;
                 $data = array(
-                    'id'=>$id_play,
+                    'id' => $id_play,
                     'artist' => $album->artist,
                     'title' => $album->title,
                     'id_album' => $album->id,
                     'id_user' => $this->idUser
                 );
                 $playlist->exchangeArray($data);
-              //  var_dump($playlist);
                 $this->getPlaylistTable()->savePlaylist($playlist);
             } catch (\Exception $ex) {
-                //echo "erreur";
             }
         }
         return array('albums' => $albums);
@@ -109,5 +106,4 @@ class PlaylistController extends AbstractActionController {
         return $this->redirect()->toRoute('playlist');
     }
 
-    
 }

@@ -57,7 +57,6 @@ class AlbumController extends AbstractActionController {
         }
 
         $form = new AlbumForm();
-      //  var_dump($album);
         $form->bind($album);
         $form->get('submit')->setAttribute('value', 'Edit');
 
