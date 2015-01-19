@@ -18,7 +18,7 @@ class PlaylistController extends AbstractActionController {
     public function indexAction() {
         //récupération de l'id de l'user 
         $userIdContainer = new Container('utilisateur');
-        $this->idUser = $userIdContainer->offSetGet(idUtilisateur);
+        $this->idUser = $userIdContainer->offSetGet('idUtilisateur');
 
         return new ViewModel(array(
             'playlists' => $this->getPlaylistTable()->fetchByIdUser($this->idUser),
@@ -35,7 +35,7 @@ class PlaylistController extends AbstractActionController {
 
     public function addAction() {//ici on récupère ID music et ID User --> insertion dans playlist
         $userIdContainer = new Container('utilisateur');
-        $this->idUser = $userIdContainer->offSetGet(idUtilisateur);
+        $this->idUser = $userIdContainer->offSetGet('idUtilisateur');
         $albums = $this->getAlbumTable()->fetchAll();
 
         $this->idAlbum = (int) $this->params()->fromRoute('id', 0); //permet de récupérer l'id de l'album sur lequel on a cliqué
