@@ -15,3 +15,8 @@ module reprend le tutorial : http://framework.zend.com/manual/current/en/user-gu
 La playlist permet de stocker les titres choisis par un user.
 
 Enfin il y a un module Inscription pour ajouter des users
+
+
+Dans le dossier config puis dans le dossier autoload il faut copier le fichier "local.php.dist"
+puis le renommer en "local.php". Puis il faut modifier les paramètres en fonction de vos identifiants
+et mot de passe pour vous connectez à votre votre base de données.
