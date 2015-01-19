@@ -15,14 +15,18 @@ class AlbumController extends AbstractActionController {
         return new ViewModel(array(
             'albums' => $this->getAlbumTable()->fetchAll(),
         ));
-        //JSON
-//        $result=$this->getAlbumTable()->fetchAll();
-//        $data=array();
-//        foreach($result as $value){
-//            array_push($data, $value);
-//        }
-//        echo json_encode($data);
-//        exit();
+        
+    }
+    
+    public function indexJSONAction(){
+       // JSON
+        $result=$this->getAlbumTable()->fetchAll();
+        $data=array();
+        foreach($result as $value){
+            array_push($data, $value);
+        }
+        echo json_encode($data);
+        exit();
     }
 
     public function addAction() {

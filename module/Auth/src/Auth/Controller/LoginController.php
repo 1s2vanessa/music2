@@ -72,12 +72,14 @@ class LoginController extends AbstractActionController {
     }
 
     public function logoutAction() {
+        
         $authService = $this->serviceLocator->get('auth_service');
         if (!$authService->hasIdentity()) {
             // if not log in, redirect to login page
             return $this->redirect()->toUrl('login');
         }
-
+         $UserIdContainer = new Container('utilisateur');
+          $UserIdContainer->getManager()->getStorage()->clear('utilisateur');
         $authService->clearIdentity();
         $form = new Login();
         $viewModel = new ViewModel(array('loginMsg' => array('You have been logged out'),
