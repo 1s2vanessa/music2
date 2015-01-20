@@ -46,3 +46,10 @@ Accès index JSON
 
 Pour aller sur la page de l'index JSON : 
 http://localhost/music2/public/album/indexJSON
+
+
+
+Utilisation de l'application
+=============================
+
+Reporter vous au manuel d'utilisation de l'application : "Manuel d'utilisation.pdf"
