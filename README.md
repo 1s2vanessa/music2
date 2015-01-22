@@ -45,7 +45,7 @@ Accès index JSON
 
 
 Pour aller sur la page de l'index JSON : 
-http://localhost/music2/public/album/indexJSON
+http://localhost/music2/public/album/indexbis
 
 
 
