@@ -1,0 +1,21 @@
+<div ng-app="" ng-controller="Controller">
+
+
+
+    <table ng-table class="table">
+    <tr ng-repeat="album in albums">
+            <td>{{ album.id}}</td>
+            <td>{{ album.artist}}</td>
+            <td>{{ album.title}}</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    function Controller($scope, $http) {
+        $http.get("http://localhost/music2/public/album/JSON")
+                .success(function(response) {
+                    $scope.albums = response;
+                });
+    }
+</script>

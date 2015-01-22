@@ -6,6 +6,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Album\Model\Album;
 use Album\Form\AlbumForm;
+use Zend\Json\Json;
 
 class AlbumController extends AbstractActionController {
 
@@ -18,15 +19,18 @@ class AlbumController extends AbstractActionController {
         
     }
     
-    public function indexJSONAction(){
-       // JSON
-        $result=$this->getAlbumTable()->fetchAll();
+    public function JSONAction() {
+       $result=$this->getAlbumTable()->fetchAll();
         $data=array();
         foreach($result as $value){
             array_push($data, $value);
         }
-        echo json_encode($data);
+        echo json_encode($data);  
         exit();
+    }
+    
+    public function indexbisAction(){
+       
     }
 
     public function addAction() {

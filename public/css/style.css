@@ -43,3 +43,7 @@ div.container a.brand {
 div.label{
      color: #0033CC;
 }
+
+.ng-table {
+    border: 1px solid #000;
+}
